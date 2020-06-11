@@ -12,7 +12,7 @@ import { Dimensions } from 'react-native';
 
 import {getCombined} from "../util/PlayerUtils";
 import {renderTrophies} from "../util/PlayerUtils";
-import {topPicks}  from "../service/PlayerService";
+import {matchSelections}  from "../service/PlayerService";
 
 
 import {styles} from './Styles';
@@ -21,57 +21,36 @@ import {styles} from './Styles';
 
 //const Tab = createBottomTabNavigator();
 
-class TopPicks extends React.Component {
+class MatchEvent extends React.Component {
   constructor(props) {
    super(props);
 
    this.state = {
-     loading: true,
-     competition:  props.navigation.state.params.competition,
-     data: []
+     selections: props.navigation.state.params.selections,
+     event: props.navigation.state.params.label
    }
-
-   setDataSource(this);
 
  }
 
 
+
  _renderItem = ({item}) => (
    <ListItem
-   title={item.label}
-   titleStyle={styles.listItemSmall}
+     title={item.label}
+     titleStyle={styles.listItemSmall}
      containerStyle={styles.container}
+     chevron
      subtitle={<View><Text style={styles.listItemTiny}>{item.currentTeam}</Text>{renderTrophies(item)}</View>}
-     badge={{ value: item.fantasyEventScore.toFixed(2),
+     onPress={() => this.props.navigation.navigate('Player',
+       {
+         player: item
+       })}
+     badge={{ value: getScore(item, this.state.event),
               textStyle: { color: 'limegreen', fontSize: 20 },
-              containerStyle:{ position: 'absolute',  right: -4, top: 25 },
+              containerStyle:{ position: 'absolute',  right: 40, top: 25 },
               badgeStyle: {backgroundColor: "#36454f", borderWidth: 0}}}
      />
  );
-
-
-
- _renderEvent = ({item}) => (
-   <ListItem
-     title={item.event+(item.event === 'saves' ? " expected" : " expected (%)")} //saves should  not have %
-     titleStyle={styles.titleListItem}
-     containerStyle={styles.container}
-     chevron
-     subtitle={
-       <FlatList
-         data={item.playerResponses.slice(0,5)}
-         renderItem={this._renderItem}
-         keyExtractor={(item, index) => index.toString()}
-       />
-     }
-     onPress={() => this.props.navigation.navigate('TopPicksByEvent',
-                 {
-                   selections: this.state.data.filter(f => f.event === item.event)[0].playerResponses,
-                   label: item.event
-             })}
-    />
- );
-
 
 
   render() {
@@ -90,8 +69,8 @@ class TopPicks extends React.Component {
        }
       {!this.state.loading &&
         <FlatList
-          data={this.state.data}
-          renderItem={this._renderEvent}
+          data={this.state.selections}
+          renderItem={this._renderItem}
           keyExtractor={(item, index) => index.toString()}
         />
         }
@@ -101,18 +80,22 @@ class TopPicks extends React.Component {
 }
 
 
-async function setDataSource(component){
-   topPicks(component.state.competition)
-   .then( data => {
-     console.log(data);
-     component.setState({data: data.reverse(), loading: false});
-   })
-   .catch((error) => console.log(error));
+function getScore(player, event){
+
+   switch(event){
+     case "goals":
+     return getCombined(player.fantasyResponse[0].goals).toFixed(2);
+     case "assists":
+     return getCombined(player.fantasyResponse[0].assists).toFixed(2);
+     case "yellow_card":
+     return getCombined(player.fantasyResponse[0].yellowCards).toFixed(2);
+     case "saves":
+     return player.fantasyResponse[0].saves.toFixed(2);
+   }
+
 }
-
-
 
 
 //export default createAppContainer(TabNavigator);
 
-export default TopPicks;
+export default MatchEvent;

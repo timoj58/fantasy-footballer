@@ -39,10 +39,9 @@ export function players(team){
   return get(HOST+'/players?team='+team);
 }
 
-export function player(player){
-
+export function matchSelections(competition, home, away){
+  return get(HOST+"/match-selections?competition="+competition+"&home="+home+"&away="+away);
 }
-
 export function topPicks(competition){
-
+  return get(HOST+"/top-selections?competition="+competition);
 }

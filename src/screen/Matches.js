@@ -47,6 +47,9 @@ class Matches extends React.Component {
      containerStyle={styles.container}
      onPress={() => this.props.navigation.navigate('Match',
        {
+         competition: this.state.competition,
+         home: item.home.id,
+         away: item.away.id,
          label: item.home.label + ' vs '+ item.away.label
        })}
     />

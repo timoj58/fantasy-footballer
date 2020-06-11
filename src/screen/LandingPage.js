@@ -18,7 +18,7 @@ class LandingPage extends React.Component {
    super(props);
 
    this.state = {
-     loading: false,
+     loading: true,
      competitions:  []
    }
 

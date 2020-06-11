@@ -25,6 +25,8 @@ import {dirtyTrophyYellow} from "../util/PlayerUtils";
 import {wizardTrophy} from "../util/PlayerUtils";
 import {marksmanTrophy} from "../util/PlayerUtils";
 import {currentPepperColor} from "../util/PlayerUtils";
+import {renderTrophies} from "../util/PlayerUtils";
+
 
 
 
@@ -55,48 +57,7 @@ class Players extends React.Component {
        {
          player: item
        })}
-    subtitle={<View style={{flex: 1,  flexDirection: 'row'}}>
-      {marksman(item) && <Icon
-        name='trophy'
-        type='font-awesome-5'
-        size={15}
-        color={marksmanTrophy(item)} />}
-      {wizard(item) && <Icon
-        name='trophy'
-        type='font-awesome-5'
-        size={15}
-        color={wizardTrophy(item)} />}
-        { dirtyRed(item) && <Icon
-          name='trophy'
-          type='font-awesome-5'
-          size={15}
-          color={dirtyTrophyRed(item)} />}
-          { dirtyYellow(item) && <Icon
-            name='trophy'
-            type='font-awesome-5'
-            size={15}
-            color={dirtyTrophyYellow(item)} />}
-          {currentMarksman(item) && <Icon
-            name='pepper-hot'
-            type='font-awesome-5'
-            size={15}
-            color={currentPepperColor(item.marksman, 'goals')} />}
-          {currentWizard(item) && <Icon
-            name='pepper-hot'
-            type='font-awesome-5'
-            size={15}
-            color={currentPepperColor(item.wizard, 'assists')} />}
-            { currentDirtyYellow(item) && <Icon
-              name='pepper-hot'
-              type='font-awesome-5'
-              size={15}
-              color={currentPepperColor(item.hardmanYellow, 'yellowCards')} />}
-              { currentDirtyRed(item) && <Icon
-                name='pepper-hot'
-                type='font-awesome-5'
-                size={15}
-                color={currentPepperColor(item.hardmanRed, 'redCards')} />}
-      </View>}
+    subtitle={renderTrophies(item)}
     />
  );
 

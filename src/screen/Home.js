@@ -9,9 +9,11 @@ import { Icon, Tile } from 'react-native-elements'
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
+import MyTeam from './MyTeam';
 import Teams from './Teams';
 import TopPicks from './TopPicks';
 import Matches from './Matches';
+
 
 import {styles} from './Styles';
 
@@ -28,7 +30,8 @@ class Home extends React.Component {
 const TabNavigator = createBottomTabNavigator({
   TopPicks: TopPicks,
   Matches: Matches,
-  Teams: Teams
+  Teams: Teams,
+  MyTeam: MyTeam
 },
 {
    defaultNavigationOptions: ({ navigation }) => ({
@@ -39,9 +42,11 @@ const TabNavigator = createBottomTabNavigator({
          // Sometimes we want to add badges to some icons.
          // You can check the implementation below.
        } else if (routeName === 'Matches') {
-         iconName = `calendar-check-o`;
+         iconName = `calendar-check`;
        }else if (routeName === 'Teams') {
-         iconName = `group`;
+         iconName = `globe`;
+       }else if (routeName === 'MyTeam') {
+         iconName = `clipboard-check`;
        }
 
        // You can return any component that you like here!
@@ -49,7 +54,7 @@ const TabNavigator = createBottomTabNavigator({
 
   //  The casing of the route name doesn't matter -- you can use lowercase home or capitalized Home, it's up to you. Name, type: 'font-awesome', size: iconSize, color: 'silver' }};
 
-       return <Icon name={iconName} type={'font-awesome'} size={25} color={tintColor} />;
+       return <Icon name={iconName} type={'font-awesome-5'} size={25} color={tintColor} />;
      },
    }),
    tabBarOptions: {

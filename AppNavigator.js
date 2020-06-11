@@ -7,6 +7,9 @@
    import Players from "./src/screen/Players";
    import Player from "./src/screen/Player";
    import Match from "./src/screen/Match";
+   import MatchEvent from "./src/screen/MatchEvent";
+   import TopPicksByEvent from "./src/screen/TopPicksByEvent";
+
 
 
     const AppNavigator = createStackNavigator({
@@ -45,6 +48,20 @@
      title: `${navigation.state.params.label}`,
     headerStyle: { backgroundColor: 'silver' }
   })
+},
+MatchEvent: {
+  screen: MatchEvent,
+  navigationOptions: ({ navigation }) => ({
+    title: `${navigation.state.params.label}`,
+   headerStyle: { backgroundColor: 'silver' }
+ })
+},
+TopPicksByEvent: {
+  screen: TopPicksByEvent,
+  navigationOptions: ({ navigation }) => ({
+    title: `${navigation.state.params.label}`,
+   headerStyle: { backgroundColor: 'silver' }
+ })
 }
  });
 

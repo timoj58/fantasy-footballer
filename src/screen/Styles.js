@@ -15,6 +15,13 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-start',
      alignItems: 'stretch',
    },
+   containerNarrow: {
+     flex: 1,
+     backgroundColor: '#36454f',
+     justifyContent: 'flex-start',
+     height: 15,
+      alignItems: 'stretch',
+    },
    shadowContainer: {
    flex: 1,
    backgroundColor: '#36454f',
@@ -87,6 +94,10 @@ export const styles = StyleSheet.create({
    color: 'silver',
    fontSize: 16
  },
+ listItemTiny: {
+  color: 'grey',
+  fontSize: 13
+},
  listItemSmallRed: {
   color: 'orangered',
   fontSize: 15

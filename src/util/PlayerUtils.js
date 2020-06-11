@@ -226,10 +226,10 @@ export function renderPlayerSpecific(player){
     title={player.label}
     titleStyle={styles.listItem}>
     <ListItem
-      title="Expected Goal (%)"
+      title="Expected (%)"
       titleStyle={styles.listItemSmall}
       containerStyle={styles.cardListItem}
-      badge={{ value:  57, textStyle: { color: 'limegreen', fontSize: 25 }, containerStyle:{ position: 'absolute',  right: -4 },badgeStyle: {backgroundColor: "#36454f", borderWidth: 0}}}
+  //    badge={{ value:   getCombined(fantasyOutcome).toFixed(2), textStyle: { color: 'limegreen', fontSize: 25 }, containerStyle:{ position: 'absolute',  right: -4 },badgeStyle: {backgroundColor: "#36454f", borderWidth: 0}}}
     />
    </Card>
 }
@@ -373,4 +373,50 @@ export function renderPlayer(player){
         </View>
       }/>
    </Card>
+}
+
+
+export function renderTrophies(item){
+  return <View style={{flex: 1,  flexDirection: 'row'}}>
+    {marksman(item) && <Icon
+      name='trophy'
+      type='font-awesome-5'
+      size={15}
+      color={marksmanTrophy(item)} />}
+    {wizard(item) && <Icon
+      name='trophy'
+      type='font-awesome-5'
+      size={15}
+      color={wizardTrophy(item)} />}
+      { dirtyRed(item) && <Icon
+        name='trophy'
+        type='font-awesome-5'
+        size={15}
+        color={dirtyTrophyRed(item)} />}
+        { dirtyYellow(item) && <Icon
+          name='trophy'
+          type='font-awesome-5'
+          size={15}
+          color={dirtyTrophyYellow(item)} />}
+        {currentMarksman(item) && <Icon
+          name='pepper-hot'
+          type='font-awesome-5'
+          size={15}
+          color={currentPepperColor(item.marksman, 'goals')} />}
+        {currentWizard(item) && <Icon
+          name='pepper-hot'
+          type='font-awesome-5'
+          size={15}
+          color={currentPepperColor(item.wizard, 'assists')} />}
+          { currentDirtyYellow(item) && <Icon
+            name='pepper-hot'
+            type='font-awesome-5'
+            size={15}
+            color={currentPepperColor(item.hardmanYellow, 'yellowCards')} />}
+            { currentDirtyRed(item) && <Icon
+              name='pepper-hot'
+              type='font-awesome-5'
+              size={15}
+              color={currentPepperColor(item.hardmanRed, 'redCards')} />}
+    </View>
 }
