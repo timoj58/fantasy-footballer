@@ -285,16 +285,16 @@ export function renderPlayer(player){
   return <Card
     containerStyle={styles.card}>
     <ListItem
-      title="Apperances"
+      title="Appearances"
       titleStyle={styles.listItemSmall}
       containerStyle={styles.cardListItem}
-      badge={{ value:  player.appearances, textStyle: { color: 'tomato',fontSize: 20  }, containerStyle:{ position: 'absolute', right: -4 },badgeStyle: {backgroundColor: "#36454f", borderWidth: 0} }}
+      badge={{ value:  player.appearances, textStyle: { color: 'gold',fontSize: 20  }, containerStyle:{ position: 'absolute', right: -4 },badgeStyle: {backgroundColor: "#36454f", borderWidth: 0} }}
     />
     <ListItem
       title="Goals"
       titleStyle={styles.listItemSmall}
       containerStyle={styles.cardListItem}
-      badge={{ value:  player.goals, textStyle: { color: 'tomato',fontSize: 20  }, containerStyle:{ position: 'absolute', right: -4 }, badgeStyle: {backgroundColor: "#36454f", borderWidth: 0} }}
+      badge={{ value:  player.goals, textStyle: { color: 'gold',fontSize: 20  }, containerStyle:{ position: 'absolute', right: -4 }, badgeStyle: {backgroundColor: "#36454f", borderWidth: 0} }}
       subtitle={
         <View style={{flexDirection: 'row'}}>
         {marksman(player) && <Icon
@@ -315,7 +315,7 @@ export function renderPlayer(player){
       title="Assists"
       titleStyle={styles.listItemSmall}
       containerStyle={styles.cardListItem}
-      badge={{ value:  player.assists, textStyle: { color: 'tomato', fontSize: 20 }, containerStyle:{ position: 'absolute',  right: -4 },badgeStyle: {backgroundColor: "#36454f", borderWidth: 0}}}
+      badge={{ value:  player.assists, textStyle: { color: 'gold', fontSize: 20 }, containerStyle:{ position: 'absolute',  right: -4 },badgeStyle: {backgroundColor: "#36454f", borderWidth: 0}}}
       subtitle={
         <View style={{flexDirection: 'row'}}>
         {wizard(player) && <Icon
@@ -336,7 +336,7 @@ export function renderPlayer(player){
       title="Yellow Cards"
       titleStyle={styles.listItemSmall}
       containerStyle={styles.cardListItem}
-      badge={{ value:  player.yellowCards, textStyle: { color: 'tomato',fontSize: 20  }, containerStyle:{ position: 'absolute', right: -4 },badgeStyle: {backgroundColor: "#36454f", borderWidth: 0} }}
+      badge={{ value:  player.yellowCards, textStyle: { color: 'gold',fontSize: 20  }, containerStyle:{ position: 'absolute', right: -4 },badgeStyle: {backgroundColor: "#36454f", borderWidth: 0} }}
       subtitle={
         <View style={{flexDirection: 'row'}}>
         {dirtyYellow(player) && <Icon
@@ -356,7 +356,7 @@ export function renderPlayer(player){
       title="Red Cards"
       titleStyle={styles.listItemSmall}
       containerStyle={styles.cardListItem}
-      badge={{ value:  player.redCards, textStyle: { color: 'tomato',fontSize: 20  }, containerStyle:{ position: 'absolute',  right: -4 },badgeStyle: {backgroundColor: "#36454f", borderWidth: 0} }}
+      badge={{ value:  player.redCards, textStyle: { color: 'gold',fontSize: 20  }, containerStyle:{ position: 'absolute',  right: -4 },badgeStyle: {backgroundColor: "#36454f", borderWidth: 0} }}
       subtitle={
         <View style={{flexDirection: 'row'}}>
         {dirtyRed(player) && <Icon

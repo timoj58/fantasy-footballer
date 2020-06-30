@@ -45,7 +45,7 @@ class Match extends React.Component {
      containerStyle={styles.container}
      subtitle={<View><Text style={styles.listItemTiny}>{item.currentTeam}</Text>{renderTrophies(item)}</View>}
      badge={{ value: item.fantasyEventScore.toFixed(2),
-              textStyle: { color: 'limegreen', fontSize: 20 },
+              textStyle: { color: 'limegreen', fontSize: 16 },
               containerStyle:{ position: 'absolute',  right: -4, top: 25 },
               badgeStyle: {backgroundColor: "#36454f", borderWidth: 0}}}
      />
@@ -55,7 +55,7 @@ class Match extends React.Component {
 
  _renderEvent = ({item}) => (
    <ListItem
-     title={item.event+(item.event === 'saves' ? " expected" : " expected (%)")} //saves should  not have %
+     title={item.event.replace('_',' ')+(item.event === 'saves' ? " " : " (%)")} //saves should  not have %
      titleStyle={styles.titleListItem}
      containerStyle={styles.container}
      chevron

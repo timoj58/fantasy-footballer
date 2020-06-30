@@ -31,7 +31,7 @@ class LandingPage extends React.Component {
 _renderCompetition = ({item}) => (
   <ListItem
     title={item.label}
-    titleStyle={styles.listItem}
+    titleStyle={styles.listItemSmall}
     chevron
     containerStyle={{ borderBottomWidth: 0, backgroundColor: "#36454f" }}
     onPress={() => this.props.navigation.navigate('Home',

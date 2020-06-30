@@ -46,7 +46,7 @@ class MatchEvent extends React.Component {
          player: item
        })}
      badge={{ value: getScore(item, this.state.event),
-              textStyle: { color: 'limegreen', fontSize: 20 },
+              textStyle: { color: 'limegreen', fontSize: 16 },
               containerStyle:{ position: 'absolute',  right: 40, top: 25 },
               badgeStyle: {backgroundColor: "#36454f", borderWidth: 0}}}
      />

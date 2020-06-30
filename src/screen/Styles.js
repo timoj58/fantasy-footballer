@@ -136,6 +136,12 @@ titleBox: {
    fontWeight: 'bold',
    fontSize: 30
  },
+ titleListItemCenter: {
+  color: 'grey',
+  fontWeight: 'bold',
+  fontSize: 30,
+  textAlign: 'center'
+},
  titleListItemMedium: {
   color: 'grey',
   fontWeight: 'bold',

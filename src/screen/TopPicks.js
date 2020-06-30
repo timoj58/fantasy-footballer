@@ -6,9 +6,10 @@ import React from 'react';
 } from 'react-navigation';
 */
 import { StyleSheet, Text, View, FlatList, ScrollView } from 'react-native';
-import { Icon, Card, ListItem } from 'react-native-elements';
+import { Icon, Card, ListItem, Button } from 'react-native-elements';
 import * as Progress from 'react-native-progress';
 import { Dimensions } from 'react-native';
+import { Pages } from 'react-native-pages';
 
 import {getCombined} from "../util/PlayerUtils";
 import {renderTrophies} from "../util/PlayerUtils";
@@ -43,34 +44,41 @@ class TopPicks extends React.Component {
      containerStyle={styles.container}
      subtitle={<View><Text style={styles.listItemTiny}>{item.currentTeam}</Text>{renderTrophies(item)}</View>}
      badge={{ value: item.fantasyEventScore.toFixed(2),
-              textStyle: { color: 'limegreen', fontSize: 20 },
-              containerStyle:{ position: 'absolute',  right: -4, top: 25 },
+              textStyle: { color: 'limegreen', fontSize: 16 },
+              containerStyle:{ position: 'absolute',  right: 5, top: 25 },
               badgeStyle: {backgroundColor: "#36454f", borderWidth: 0}}}
      />
  );
 
 
 
- _renderEvent = ({item}) => (
-   <ListItem
-     title={item.event+(item.event === 'saves' ? " expected" : " expected (%)")} //saves should  not have %
-     titleStyle={styles.titleListItem}
-     containerStyle={styles.container}
-     chevron
-     subtitle={
-       <FlatList
-         data={item.playerResponses.slice(0,5)}
-         renderItem={this._renderItem}
-         keyExtractor={(item, index) => index.toString()}
-       />
-     }
-     onPress={() => this.props.navigation.navigate('TopPicksByEvent',
-                 {
-                   selections: this.state.data.filter(f => f.event === item.event)[0].playerResponses,
-                   label: item.event
-             })}
+ _renderEvent(item){
+  return  <View>
+   <Text style={styles.titleListItemCenter}>{item.event.replace('_',' ')+(item.event === 'saves' ? "" : " (%)")}</Text>
+    <FlatList
+    data={item.playerResponses.slice(0,5)}
+    renderItem={this._renderItem}
+    keyExtractor={(item, index) => index.toString()}
     />
- );
+    <Button
+      title="see all "
+      titleStyle={styles.listItem}
+      type="clear"
+      icon={
+      <Icon
+      name="zoom-out"
+      size={20}
+      color="silver"
+     />}
+     iconRight
+      onPress={() => this.props.navigation.navigate('TopPicksByEvent',
+                {
+                  selections: this.state.data.filter(f => f.event === item.event)[0].playerResponses,
+                  label: item.event
+            })}
+    />
+    </View>
+ };
 
 
 
@@ -89,11 +97,12 @@ class TopPicks extends React.Component {
           </View>
        }
       {!this.state.loading &&
-        <FlatList
-          data={this.state.data}
-          renderItem={this._renderEvent}
-          keyExtractor={(item, index) => index.toString()}
-        />
+         <Pages>
+         {this._renderEvent(this.state.data[0])}
+         {this._renderEvent(this.state.data[1])}
+         {this._renderEvent(this.state.data[2])}
+         {this._renderEvent(this.state.data[3])}
+        </Pages>
         }
    </View>
      );
@@ -104,7 +113,7 @@ class TopPicks extends React.Component {
 async function setDataSource(component){
    topPicks(component.state.competition)
    .then( data => {
-     console.log(data);
+     console.log(data); //need to re order this...goals, assists, saves, yellow cards
      component.setState({data: data.reverse(), loading: false});
    })
    .catch((error) => console.log(error));

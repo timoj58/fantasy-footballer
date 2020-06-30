@@ -4,7 +4,6 @@
    import { createStackNavigator } from 'react-navigation-stack'
    import LandingPage from "./src/screen/LandingPage";
    import Home from "./src/screen/Home";
-   import Players from "./src/screen/Players";
    import Player from "./src/screen/Player";
    import Match from "./src/screen/Match";
    import MatchEvent from "./src/screen/MatchEvent";
@@ -28,13 +27,6 @@
         headerStyle: { backgroundColor: 'silver' }
      })
    },
-   Players: {
-     screen: Players,
-     navigationOptions: ({ navigation }) => ({
-       title: `${navigation.state.params.label}`,
-      headerStyle: { backgroundColor: 'silver' }
-    })
-  },
   Player: {
     screen: Player,
     navigationOptions: ({ navigation }) => ({

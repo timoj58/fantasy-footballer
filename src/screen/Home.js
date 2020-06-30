@@ -9,8 +9,6 @@ import { Icon, Tile } from 'react-native-elements'
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-import MyTeam from './MyTeam';
-import Teams from './Teams';
 import TopPicks from './TopPicks';
 import Matches from './Matches';
 
@@ -29,9 +27,7 @@ class Home extends React.Component {
 
 const TabNavigator = createBottomTabNavigator({
   TopPicks: TopPicks,
-  Matches: Matches,
-  Teams: Teams,
-  MyTeam: MyTeam
+  Matches: Matches
 },
 {
    defaultNavigationOptions: ({ navigation }) => ({
@@ -43,10 +39,6 @@ const TabNavigator = createBottomTabNavigator({
          // You can check the implementation below.
        } else if (routeName === 'Matches') {
          iconName = `calendar-check`;
-       }else if (routeName === 'Teams') {
-         iconName = `globe`;
-       }else if (routeName === 'MyTeam') {
-         iconName = `clipboard-check`;
        }
 
        // You can return any component that you like here!
