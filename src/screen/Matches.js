@@ -69,7 +69,7 @@ class Matches extends React.Component {
             height={10}
           //  thickness={20}
             />
-          </View>
+        </View>
        }
       {!this.state.loading &&
          <FlatList
@@ -84,10 +84,10 @@ class Matches extends React.Component {
 
 
 async function setDataSource(component){
-   events(component.state.country, component.state.competition)
+   events(component.state.competition)
    .then( data => {
-     var exists = data.length > 0;
-     component.setState({matches: exists ?  data.map(m => m.upcomingEventResponses)[0] : [], loading: false});
+     var exists = data['body'].upcomingEventResponses.length > 0;
+     component.setState({matches: exists ?  data['body'].upcomingEventResponses : [], loading: false});
    })
    .catch((error) => console.log(error));
 }

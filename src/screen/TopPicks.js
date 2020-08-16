@@ -6,13 +6,15 @@ import React from 'react';
 } from 'react-navigation';
 */
 import { StyleSheet, Text, View, FlatList, ScrollView } from 'react-native';
-import { Icon, Card, ListItem, Button } from 'react-native-elements';
+import { Icon, Card, ListItem, Button, Avatar } from 'react-native-elements';
 import * as Progress from 'react-native-progress';
 import { Dimensions } from 'react-native';
 import { Pages } from 'react-native-pages';
 
 import {getCombined} from "../util/PlayerUtils";
 import {renderTrophies} from "../util/PlayerUtils";
+import {averageRatingIndicator} from "../util/PlayerUtils";
+import {averageRatingIndicatorColor} from "../util/PlayerUtils";
 import {topPicks}  from "../service/PlayerService";
 
 
@@ -32,7 +34,7 @@ class TopPicks extends React.Component {
      data: []
    }
 
-   setDataSource(this);
+//   setDataSource(this);
 
  }
 
@@ -41,12 +43,16 @@ class TopPicks extends React.Component {
    <ListItem
    title={item.label}
    titleStyle={styles.listItemSmall}
-     containerStyle={styles.container}
+  containerStyle={styles.container}
      subtitle={<View><Text style={styles.listItemTiny}>{item.currentTeam}</Text>{renderTrophies(item)}</View>}
      badge={{ value: item.fantasyEventScore.toFixed(2),
               textStyle: { color: 'limegreen', fontSize: 16 },
-              containerStyle:{ position: 'absolute',  right: 5, top: 25 },
+              containerStyle:{ position: 'absolute',  right: 25, top: 25 },
               badgeStyle: {backgroundColor: "#36454f", borderWidth: 0}}}
+    leftAvatar={<Avatar
+              rounded
+              icon={{name: averageRatingIndicator(item), color: averageRatingIndicatorColor(item), type: 'font-awesome', size: 20}}
+              />}
      />
  );
 
@@ -87,13 +93,7 @@ class TopPicks extends React.Component {
        <View style={styles.container}>
        {this.state.loading &&
          <View style={styles.progressContainer}>
-         <Progress.Bar
-            size={Dimensions.get('window').width/4}
-            indeterminate={true}
-            color='black'
-            height={10}
-          //  thickness={20}
-            />
+            <Text style={styles.titleListItemCenter}>{"server maintenance - back soon!"}</Text>
           </View>
        }
       {!this.state.loading &&
@@ -114,7 +114,7 @@ async function setDataSource(component){
    topPicks(component.state.competition)
    .then( data => {
      console.log(data); //need to re order this...goals, assists, saves, yellow cards
-     component.setState({data: data.reverse(), loading: false});
+     component.setState({data: data, loading: false});
    })
    .catch((error) => console.log(error));
 }

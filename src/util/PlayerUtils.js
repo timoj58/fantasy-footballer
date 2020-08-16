@@ -9,6 +9,31 @@ import { Card, ListItem, Icon } from 'react-native-elements';
 import {styles} from '../screen/Styles';
 
 
+export function averageRatingIndicator(player){
+  var total = player.averages.filter(f => f.fantasyEventKey === player.fantasyEventKey)[0];
+
+  if(total === undefined){
+    return 'warning';
+  }
+  if(total.fantasyEventScore < player.fantasyEventScore){
+    return 'arrow-up';
+  }
+  return 'arrow-down';
+}
+
+export function averageRatingIndicatorColor(player){
+  var total = player.averages.filter(f => f.fantasyEventKey === player.fantasyEventKey)[0];
+
+  if(total === undefined){
+    return 'silver';
+  }
+
+  if(total.fantasyEventScore < player.fantasyEventScore){
+    return 'green';
+  }
+  return 'red';
+}
+
 export function getCombined(fantasyOutcome){
 
   var total = 0;

@@ -27,16 +27,8 @@ export function competitions() {
   return get(HOST+'/competitions');
 }
 
-export function teams(competition){
-  return get(HOST+'/teams?competition='+competition);
-}
-
-export function events(country, competition){
-  return get(HOST+'/events?country='+country+'&competition='+competition);
-}
-
-export function players(team){
-  return get(HOST+'/players?team='+team);
+export function events(competition){
+  return get(HOST+'/events?competition='+competition);
 }
 
 export function matchSelections(competition, home, away){

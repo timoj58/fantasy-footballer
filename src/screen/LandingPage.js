@@ -95,8 +95,7 @@ _renderItem = ({item}) => (
 async function setDataSource(component){
    competitions()
    .then( data => {
-     //console.log());
-     component.setState({competitions: data.filter(f => f.competitionResponses.map(m => m.fantasyLeague).includes(true)), loading: false});
+     component.setState({competitions: data['body'].filter(f => f.competitionResponses.map(m => m.fantasyLeague).includes(true)), loading: false});
    })
    .catch((error) => console.log(error));
 }

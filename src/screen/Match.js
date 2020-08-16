@@ -6,13 +6,15 @@ import React from 'react';
 } from 'react-navigation';
 */
 import { StyleSheet, Text, View, FlatList, ScrollView } from 'react-native';
-import { Icon, Card, ListItem } from 'react-native-elements';
+import { Icon, Card, ListItem, Avatar } from 'react-native-elements';
 import * as Progress from 'react-native-progress';
 import { Dimensions } from 'react-native';
 
 import {getCombined} from "../util/PlayerUtils";
 import {renderTrophies} from "../util/PlayerUtils";
 import {matchSelections}  from "../service/PlayerService";
+import {averageRatingIndicator} from "../util/PlayerUtils";
+import {averageRatingIndicatorColor} from "../util/PlayerUtils";
 
 
 import {styles} from './Styles';
@@ -33,7 +35,7 @@ class Match extends React.Component {
      data: []
    }
 
-   setDataSource(this);
+  // setDataSource(this);
 
  }
 
@@ -48,6 +50,10 @@ class Match extends React.Component {
               textStyle: { color: 'limegreen', fontSize: 16 },
               containerStyle:{ position: 'absolute',  right: -4, top: 25 },
               badgeStyle: {backgroundColor: "#36454f", borderWidth: 0}}}
+              leftAvatar={<Avatar
+                        rounded
+                        icon={{name: averageRatingIndicator(item), color: averageRatingIndicatorColor(item), type: 'font-awesome', size: 20}}
+                        />}
      />
  );
 
@@ -81,13 +87,7 @@ class Match extends React.Component {
        <View style={styles.container}>
        {this.state.loading &&
          <View style={styles.progressContainer}>
-         <Progress.Bar
-            size={Dimensions.get('window').width/4}
-            indeterminate={true}
-            color='black'
-            height={10}
-          //  thickness={20}
-            />
+         <Text style={styles.titleListItemCenter}>{"server maintenance - back soon!"}</Text>
           </View>
        }
       {!this.state.loading &&
